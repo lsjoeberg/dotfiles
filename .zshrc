@@ -121,14 +121,15 @@ fi
 # === Spaceship Configuration =================================================
 SPACESHIP_BATTERY_SHOW="false"
 
-# --- Customize Golang ---
-SPACESHIP_GOLANG_SYMBOL="🅖 "
-
 # === Shell Hooks =============================================================
 
-# Hook `direnv` into the shell
-eval "$(direnv hook zsh)"
+# hook `direnv` into the shell
+if command -v direnv >/dev/null 2>&1; then
+    eval "$(direnv hook zsh)"
+fi
 
 # use nord theme dircolors
-test -r "${HOME}/.dir_colors" && eval $(dircolors ~/.dir_colors)
+if [ -r ~/.dir_colors ]; then
+    eval $(dircolors ~/.dir_colors)
+fi
 
