@@ -1,0 +1,13 @@
+# --- View Settings ---------------------------------------------------
+set main-view-date = custom
+set main-view-date-format = "%y%m%d %H:%M"
+
+# --- UI Display ------------------------------------------------------
+set line-graphics = utf-8
+
+# --- Git Content -----------------------------------------------------
+set mailmap = true
+
+# --- Colors ----------------------------------------------------------
+# color area fgcolor bgcolor [attributes]
+color cursor default black normal

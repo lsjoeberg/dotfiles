@@ -1,0 +1,90 @@
+[user]
+    name = lsjober9
+    email = lars.sjoberg@volvocars.com
+[color]
+    ui = auto
+[pretty]
+    lg = %C(yellow)%h %C(blue)%ad %C(green)%<(8,trunc)%aN %Creset%C(normal dim)•%Creset%C(bold)%<(50,trunc) %s %C(auto)%D
+[alias]
+    # aliases for common tasks -- less verbose commands
+    ap = add -p
+    an = add -N
+    co = checkout
+    cos = "!f() { git checkout "stash@{$1}" -- "$2"; }; f"
+    ci = commit
+    ca = commit --amend --no-edit     # append index to previous commit
+    cp = cherry-pick
+    st = status --short               # concise status
+    br = branch
+    ft = fetch --all --progress -v
+    df = diff
+    dt = difftool
+    ds = diff --stat
+    ss = stash push                   # "stash save"
+    sp = stash pop                    # "stash pop"
+    # rebasing
+    rb = rebase
+    rbc = rebase --continue
+    rba = rebase --abort
+    # pushing
+    pb = !sh -c 'git push -u origin $(git branch --show-current)' -
+    # merging
+    mf = merge --ff-only
+    mn = merge --no-ff
+    mfu = !sh -c 'git merge --ff-only origin/$(git rev-parse --abbrev-ref HEAD)' -
+    mnu = !sh -c 'git merge --no-ff origin/$(git rev-parse --abbrev-ref HEAD)' -
+    # utility
+    brname = rev-parse --abbrev-ref HEAD
+    unstage = reset HEAD
+    brdm = "!f() { \
+        git branch --merged | egrep -v '(^\\*|master|develop)' | xargs git branch -d; \
+    }; f"
+    rewrite = "!f() { \
+        git stash push -m 'Rebase' && git rebase -i HEAD~$1; \
+    }; f"
+    update = "!f() { \
+        git fetch "$1" -v --progress; git merge --ff-only "$1/$2" || git rebase --rebase-merges "$1/$2"; \
+    }; f"
+    grep-diff = !sh -c 'git diff-index -U -G $1 HEAD' -
+    grep-modified = !sh -c 'grep --color -n -s $1 $(git ls-files -m)' -
+    lsbr = !sh -c 'git diff --name-only HEAD $(git merge-base HEAD master)' -
+    # standard log view
+    lg = log \
+        --date=format:'%y%m%d %H:%M' \
+        --color=always \
+        --pretty=lg
+    # log for the current feature branch
+    lgb = log \
+        --date=format:'%y%m%d %H:%M' \
+        --color=always \
+        --pretty=lg \
+        master..
+    # log for all refs
+    lga = log --all \
+        --date=format:'%y%m%d %H:%M' \
+        --color=always \
+        --pretty=lg
+    # log with graph
+    lgg = log --graph \
+        --date=format:'%y%m%d %H:%M' \
+        --color=always \
+        --pretty=lg
+    lgs = !git-stat-sum \"$@\"
+    # list all contributors and their contribtion
+    users = shortlog --summary --numbered --email
+[core]
+    editor = vim
+    pager = less -R -S
+[diff]
+    tool = vimdiff
+[difftool]
+    prompt = true
+    trustExitCode = true
+[push]
+    default = simple
+[credential]
+    helper = store
+[log]
+	mailmap = true
+[mailmap]
+	file = ~/.mailmap
