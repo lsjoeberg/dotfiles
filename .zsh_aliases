@@ -9,7 +9,14 @@ alias tree4='tree -L 4'
 alias grep='grep --color'
 
 # ls: default list
-alias ls='ls -lhA --color=auto --group-directories-first'
+case $(uname) in
+    'Linux')
+        alias ls='ls -lAh --color=auto --group-directories-first'
+        ;;
+    'Darwin')
+        alias ls='ls -lAhG'
+        ;;
+esac
 
 # cp: use rsync with progress bar, "cpv" means "cp verbose"
 alias cpv='rsync -a --progress -h'      # [-a] archive, keep file permissions
