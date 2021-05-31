@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+ZSH_USERS_URL="https://github.com/zsh-users"
+
+omz_install_plugin() {
+    declare plugin="$1"
+    git clone "$ZSH_USERS_URL/${plugin}" \
+        "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/${plugin}"
+}
+
+# install oh-my-zsh config manager
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# install plugins
+omz_install_plugin "zsh-autosuggestions"
+omz_install_plugin "zsh-completions"
+omz_install_plugin "zsh-syntax-highlighting"
