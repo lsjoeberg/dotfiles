@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins/tpm"
+
+# install tpm
+if ! [ -d "$HOME/.tmux/plugins/tpm" ]; then
+    git clone https://github.com/tmux-plugins/tpm "$TMUX_PLUGIN_MANAGER_PATH"
+fi
+
+# install and update plugins
+if command -v tmux >/dev/null 2>&1; then
+    echo "Bootstrapping TMUX"
+    bash "$TMUX_PLUGIN_MANAGER_PATH/bin/install_plugins"
+    bash "$TMUX_PLUGIN_MANAGER_PATH/bin/update_plugins" all
+fi
