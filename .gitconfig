@@ -88,3 +88,5 @@
 	mailmap = true
 [mailmap]
 	file = ~/.mailmap
+[pull]
+	ff = only
