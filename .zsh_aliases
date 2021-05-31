@@ -14,7 +14,13 @@ case $(uname) in
         alias ls='ls -lAh --color=auto --group-directories-first'
         ;;
     'Darwin')
-        alias ls='ls -lAhG'
+        # use `gls` if available from brew coreutils (dircolors display properly)
+        if command -v gls >/dev/null 2>&1; then
+            alias ls='gls -lAh --color=auto --group-directories-first'
+        # use mac os `ls` (dircolors will not display properly)
+        else
+            alias ls='ls -lAhG'
+        fi
         ;;
 esac
 
