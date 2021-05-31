@@ -130,6 +130,12 @@ fi
 
 # use nord theme dircolors
 if [ -r ~/.dir_colors ]; then
-    eval $(dircolors ~/.dir_colors)
+    case $(uname) in
+    'Linux')
+        eval $(dircolors ~/.dir_colors)
+        ;;
+    'Darwin')
+        eval $(gdircolors ~/.dir_colors)
+        ;;
+    esac
 fi
-

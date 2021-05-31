@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+cd "$SRCSETUP_D" || exit
+
+if ! [ -d "$SRCSETUP_D/nord-dircolors/.git" ]; then
+    git clone https://github.com/arcticicestudio/nord-dircolors.git
+fi
+if ! [ -e ~/.dir_colors ]; then
+    ln -s "$PWD/nord-dircolors/src/dir_colors" ~/.dir_colors
+fi
