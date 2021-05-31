@@ -77,7 +77,6 @@ plugins=(
     zsh-syntax-highlighting
     zsh-autosuggestions
     zsh-completions
-    zsh-nvm
     colored-man-pages
     git-auto-fetch
     golang
