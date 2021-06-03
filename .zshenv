@@ -1,5 +1,10 @@
 # --- Application Specific Variables ------------------------------------------
 
+# locale
+export LANG="en_GB.UTF-8"
+export LC_ALL="en_GB.UTF-8"
+export LC_CTYPE="en_GB.UTF-8"
+
 # go
 export GOPATH="${HOME}/go"
 export GOBIN="${GOPATH}/bin"
