@@ -1,4 +1,4 @@
-" ====== General Options ================================================
+" ====== General Options ======================================================
 set clipboard=unnamedplus          " copy/paste
 set timeoutlen=1000 ttimeoutlen=0  " remove fdelay on ESC key
 
@@ -18,7 +18,7 @@ set viminfo='100,f1
 "           +---------- save marks for up to 100 files
 
 
-" ===== VimPlug-Bundles ================================================
+" ===== VimPlug-Bundles =======================================================
 
 call plug#begin('~/.vim/plugged')
 
@@ -51,12 +51,12 @@ Plug 'Yggdroot/indentLine'
 call plug#end()
 
 
-" ===== Colours and UI =================================================
+" ===== Colours and UI ========================================================
 
 syntax on              " turn on syntax highlighting
 set background=dark
 
-" Configure and Load Nord Colourscheme
+" Configure and Load Nord Colorscheme
 let g:nord_italic = 1
 let g:nord_underline = 1
 colorscheme nord
@@ -70,12 +70,10 @@ set concealcursor=n    " conceal on cursor line in normal mode
 set t_ZH=[3m
 set t_ZR=[23m
 
-" ----- Spelling -------------------------------------------------------
-
-" setlocal spell
+" ----- Spelling --------------------------------------------------------------
 set spelllang=en_gb
 
-" ===== Indentation ====================================================
+" ===== Indentation ===========================================================
 
 set autoindent         " always set autoindent on
 set smartindent        " hanging indent after 'new block' (e.g. new function)
@@ -93,32 +91,32 @@ filetype indent on     " load filetype-specific indent files
 set listchars=tab:»\ ,trail:·,eol:¬
 
 set nowrap             " don't soft-wrap lines at window border
-set linebreak          " hard-wrap lines at convinient points
+set linebreak          " hard-wrap lines at convenient points
 set textwidth=80
 set wrapmargin=2
 set colorcolumn=+1
 
 
-" ===== Folds ==========================================================
+" ===== Folds =================================================================
 
 set foldmethod=indent  " fold based on indent
 set foldnestmax=3      " fold maximum three levels
-set nofoldenable       " don't fold by defalt
+set nofoldenable       " don't fold by default
 
 
-" ===== Completion =====================================================
+" ===== Completion ============================================================
 
 set wildmenu           " visual autocomplete for command menu
 
 
-" ===== Scrolling ======================================================
+" ===== Scrolling =============================================================
 
 set scrolloff=8        " scroll when 8 lines away from margin
 set sidescrolloff=15
 set sidescroll=1
 
 
-" ===== Search =========================================================
+" ===== Search ================================================================
 
 set incsearch          " search when typing phrase
 set hlsearch           " highlight matches
@@ -126,9 +124,9 @@ set ignorecase         " ignore case when searching
 set smartcase          " ... unless we start with a capital latter
 
 
-" ===== Mappings and Macros ============================================
+" ===== Mappings and Macros ===================================================
 
-language time en_GB.utf-8  " use english time for datestamps
+language time en_GB.utf-8  " use English time for datestamps
 
 " Insert current datestamp; normal and inset modes
 nnoremap <F5> "strftime("%c")<CR>P
@@ -140,16 +138,10 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
-" ===== Autocommands ===================================================
-" autocmd event pattern command
 
-" map capslock to esc
-" autocmd VimEnter * silent! !xmodmap -e 'clear lock' -e 'keycode 0x42 = Escape'
-" autocmd VimLeave * silent! !xmodmap -e 'clear lock' -e 'keycode 0x42 = Caps_Lock'
+" ===== Plugin Settings =======================================================
 
-" ===== Plugin Settings ================================================
-
-" ----- Lightline ------------------------------------------------------
+" ----- Lightline -------------------------------------------------------------
 let g:lightline = {
     \ 'colorscheme' : 'nord',
     \ 'separator': {'left': "", 'right': ""},
@@ -164,11 +156,11 @@ let g:lightline = {
     \ }
 let g:Powerline_symbols = 'fancy'
 
-" ----- Tmuxline -------------------------------------------------------
+" ----- Tmuxline --------------------------------------------------------------
 let g:tmuxline_preset = 'full' " sets the layout of the status line
 
 
-" ----- Syntastic ------------------------------------------------------
+" ----- Syntastic -------------------------------------------------------------
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -179,30 +171,21 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 
 let g:syntastic_python_checkers = ['flake8']
-" let g:syntastic_quiet_messages = {
-"     \ 'regex': [
-"         \ 'missing-module-docstring',
-"         \ 'missing-function-docstring',
-"         \ 'invalid-name',
-"     \ ],
-"     \ }
 
-" ----- IndentLine -----------------------------------------------------
+" ----- IndentLine ------------------------------------------------------------
 let g:indentLine_char = '¦'  " ┆
 let g:indentLine_defaultGroup = 'SpecialKey'
 let g:indentLine_conceallevel = 2
 let g:indentLine_concealcursor = 'n'
 let g:indentLine_fileTypeExclude = ['markdown']
 
-" ----- VimTex ---------------------------------------------------------
+" ----- VimTex ----------------------------------------------------------------
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 
-" ----- VimWiki --------------------------------------------------------
+" ----- VimWiki ---------------------------------------------------------------
 let g:vimwiki_global_ext = 0
 
-" ----- Markdown -------------------------------------------------------
+" ----- Markdown --------------------------------------------------------------
 let g:markdown_folding = 1
 let g:vim_markdown_new_list_item_indent = 2
-
-
