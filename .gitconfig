@@ -85,8 +85,8 @@
 [credential]
     helper = store
 [log]
-	mailmap = true
+    mailmap = true
 [mailmap]
-	file = ~/.mailmap
+    file = ~/.mailmap
 [pull]
-	ff = only
+    ff = only
