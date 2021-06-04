@@ -44,6 +44,11 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
 
+# homebrew
+if [ $(uname -s) = 'Darwin' ] && command -v brew >/dev/null 2>&1; then
+    alias brewup='brew update && brew upgrade && brew cleanup -s && brew doctor'
+fi
+
 # pipe to clipboard with `xclip`
 alias c='xclip -selection clipboard'
 alias v='xclip -o'
