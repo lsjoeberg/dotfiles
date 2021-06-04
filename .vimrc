@@ -1,5 +1,4 @@
 " ====== General Options ======================================================
-set clipboard=unnamedplus          " copy/paste
 set timeoutlen=1000 ttimeoutlen=0  " remove fdelay on ESC key
 
 set nocompatible
@@ -17,6 +16,12 @@ set viminfo='100,f1
 "           |    +----- save global marks (don't save with `f0`)
 "           +---------- save marks for up to 100 files
 
+" clipboard
+if system('uname -s') == "Darwin\n"
+    set clipboard=unnamed        " mac os
+else
+    set clipboard=unnamedplus    " linux
+endif
 
 " ===== VimPlug-Bundles =======================================================
 
