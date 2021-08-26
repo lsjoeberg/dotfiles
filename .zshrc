@@ -85,3 +85,8 @@ if [ -r ~/.dir_colors ]; then
         ;;
     esac
 fi
+
+# initialize pyenv (after .zprofile env config)
+if command -v pyenv >/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
