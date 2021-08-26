@@ -1,0 +1,7 @@
+# homebrew bin/sbin
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
+
+# configure shells environment for pyenv: pyenv installed with homebrew
+if [ -d "$HOME/.pyenv" ]; then
+    eval "$(pyenv init --path)"
+fi
