@@ -10,7 +10,7 @@
     ap = add -p
     an = add -N
     co = checkout
-    cos = "!f() { git checkout "stash@{$1}" -- "$2"; }; f"
+    cos = "!f() { git checkout stash@{\"$1\"} -- \"$2\"; }; f"
     ci = commit
     ca = commit --amend --no-edit     # append index to previous commit
     cp = cherry-pick
@@ -27,12 +27,12 @@
     rbc = rebase --continue
     rba = rebase --abort
     # pushing
-    pb = !sh -c 'git push -u origin $(git branch --show-current)' -
+    pb = "!f() { git push -u origin \"$(git branch --show-current)\"; }; f"
     # merging
     mf = merge --ff-only
     mn = merge --no-ff
-    mfu = !sh -c 'git merge --ff-only origin/$(git rev-parse --abbrev-ref HEAD)' -
-    mnu = !sh -c 'git merge --no-ff origin/$(git rev-parse --abbrev-ref HEAD)' -
+    mfu = "!f() { git merge --ff-only origin/\"$(git rev-parse --abbrev-ref HEAD)\"; }; f"
+    mnu = "!f() { git merge --no-ff origin/\"$(git rev-parse --abbrev-ref HEAD)\"; }; f"
     # utility
     brname = rev-parse --abbrev-ref HEAD
     unstage = reset HEAD
@@ -40,14 +40,20 @@
         git branch --merged | egrep -v '(^\\*|master|develop)' | xargs git branch -d; \
     }; f"
     rewrite = "!f() { \
-        git stash push -m 'Rebase' && git rebase -i HEAD~$1; \
+        git stash push -m 'Rebase' && git rebase -i HEAD~\"$1\"; \
     }; f"
     update = "!f() { \
-        git fetch "$1" -v --progress; git merge --ff-only "$1/$2" || git rebase --rebase-merges "$1/$2"; \
+        git fetch "$1" -v --progress; git merge --ff-only \"$1/$2\" || git rebase --rebase-merges \"$1/$2\"; \
     }; f"
-    grep-diff = !sh -c 'git diff-index -U -G $1 HEAD' -
-    grep-modified = !sh -c 'grep --color -n -s $1 $(git ls-files -m)' -
-    lsbr = !sh -c 'git diff --name-only HEAD $(git merge-base HEAD master)' -
+    grep-diff = "!f() { \
+        git diff-index -U -G \"$1\" HEAD; \
+    }; f"
+    grep-modified = "!f() { \
+        grep --color -n -s \"$1\" \"$(git ls-files -m)\"; \
+    }; f"
+    lsbr = "!f() { \
+        git diff --name-only HEAD \"$(git merge-base HEAD master)\"; \
+    }; f"
     # standard log view
     lg = log \
         --date=format:'%y%m%d %H:%M' \
