@@ -17,13 +17,16 @@
     st = status --short               # concise status
     br = branch
     ft = fetch --all --progress -v
+    ru = remote -v update -p
     df = diff
+    dfc = diff --cached
     dt = difftool
     ds = diff --stat
     ss = stash push                   # "stash save"
     sp = stash pop                    # "stash pop"
     # rebasing
     rb = rebase
+    ri = "!f() { git rebase -i HEAD~\"$1\"; }; f"
     rbc = rebase --continue
     rba = rebase --abort
     # pushing
@@ -33,6 +36,8 @@
     mn = merge --no-ff
     mfu = "!f() { git merge --ff-only origin/\"$(git rev-parse --abbrev-ref HEAD)\"; }; f"
     mnu = "!f() { git merge --no-ff origin/\"$(git rev-parse --abbrev-ref HEAD)\"; }; f"
+    # updating repository
+    up = !git remote update -p && !git merge --ff-only
     # utility
     brname = rev-parse --abbrev-ref HEAD
     unstage = reset HEAD
@@ -54,6 +59,8 @@
     lsbr = "!f() { \
         git diff --name-only HEAD \"$(git merge-base HEAD master)\"; \
     }; f"
+    # list all contributors and their contribtion
+    users = shortlog --summary --numbered --email
     # standard log view
     lg = log \
         --date=format:'%y%m%d %H:%M' \
@@ -76,8 +83,6 @@
         --color=always \
         --pretty=lg
     lgs = !git-stat-sum \"$@\"
-    # list all contributors and their contribtion
-    users = shortlog --summary --numbered --email
 [core]
     editor = vim
     pager = less -R -S
