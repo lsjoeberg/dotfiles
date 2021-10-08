@@ -6,78 +6,51 @@
 [pretty]
     lg = %C(yellow)%h %C(blue)%ad %C(green)%<(8,trunc)%aN %Creset%C(normal dim)•%Creset%C(bold)%<(50,trunc) %s %C(auto)%D
 [alias]
-    # aliases for common tasks -- less verbose commands
-    ap = add -p
-    an = add -N
-    co = checkout
-    cos = "!f() { git checkout stash@{\"$1\"} -- \"$2\"; }; f"
-    ci = commit
-    ca = commit --amend --no-edit     # append index to previous commit
-    cp = cherry-pick
-    st = status --short               # concise status
+    au = add -u  # add modified files
+    ap = add -p  # add patches interactively
+    an = add -N  # track new file without adding to index
     br = branch
-    ft = fetch --all --progress -v
-    ru = remote -v update -p
+    ci = commit
+    ca = commit --amend --no-edit  # append index to previous commit
+    cia = commit --amend           # append index to previous commit, edit msg
+    co = checkout
+    cs = "!f() { git checkout stash@{\"$1\"} -- \"$2\"; }; f"
+    cb = "!f() { git checkout -b \"$1\"; }; f"
+    cp = cherry-pick
+    st = status --short            # concise status
     df = diff
-    dfc = diff --cached
-    dt = difftool
     ds = diff --stat
-    ss = stash push                   # "stash save"
-    sp = stash pop                    # "stash pop"
+    dfc = ds --cached
+    dt = difftool
+    ss = stash push                # "stash save"
+    sp = stash pop                 # "stash pop"
+    sl = stash list
+    fa = fetch --all -p -v
+    ru = remote -v update -p
     # rebasing
     rb = rebase
     ri = "!f() { git rebase -i HEAD~\"$1\"; }; f"
     rbc = rebase --continue
     rba = rebase --abort
-    # pushing
-    pb = "!f() { git push -u origin \"$(git branch --show-current)\"; }; f"
-    # merging
+    # interacting with remote
     mf = merge --ff-only
     mn = merge --no-ff
+    up = !git remote update -p && !git merge --ff-only
+    pbu = "!f() { git push -u origin \"$(git branch --show-current)\"; }; f"
     mfu = "!f() { git merge --ff-only origin/\"$(git rev-parse --abbrev-ref HEAD)\"; }; f"
     mnu = "!f() { git merge --no-ff origin/\"$(git rev-parse --abbrev-ref HEAD)\"; }; f"
-    # updating repository
-    up = !git remote update -p && !git merge --ff-only
-    # utility
-    brname = rev-parse --abbrev-ref HEAD
-    unstage = reset HEAD
-    brdm = "!f() { \
-        git branch --merged | egrep -v '(^\\*|master|develop)' | xargs git branch -d; \
-    }; f"
-    rewrite = "!f() { \
-        git stash push -m 'Rebase' && git rebase -i HEAD~\"$1\"; \
-    }; f"
-    update = "!f() { \
-        git fetch "$1" -v --progress; git merge --ff-only \"$1/$2\" || git rebase --rebase-merges \"$1/$2\"; \
-    }; f"
-    grep-diff = "!f() { \
-        git diff-index -U -G \"$1\" HEAD; \
-    }; f"
-    grep-modified = "!f() { \
-        grep --color -n -s \"$1\" \"$(git ls-files -m)\"; \
-    }; f"
-    lsbr = "!f() { \
-        git diff --name-only HEAD \"$(git merge-base HEAD master)\"; \
-    }; f"
     # list all contributors and their contribtion
-    users = shortlog --summary --numbered --email
-    # standard log view
+    contributors = shortlog --summary --numbered --email
+    # log
     lg = log \
         --date=format:'%y%m%d %H:%M' \
         --color=always \
         --pretty=lg
-    # log for the current feature branch
-    lgb = log \
-        --date=format:'%y%m%d %H:%M' \
-        --color=always \
-        --pretty=lg \
-        master..
-    # log for all refs
+    lgb = lg main..
     lga = log --all \
         --date=format:'%y%m%d %H:%M' \
         --color=always \
         --pretty=lg
-    # log with graph
     lgg = log --graph \
         --date=format:'%y%m%d %H:%M' \
         --color=always \
@@ -101,3 +74,5 @@
     file = ~/.mailmap
 [pull]
     ff = only
+[init]
+	defaultBranch = main
