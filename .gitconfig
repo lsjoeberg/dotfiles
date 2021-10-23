@@ -22,6 +22,7 @@
     ds = diff --stat
     dfc = ds --cached
     dt = difftool
+    mt = mergetool
     ss = stash push                # "stash save"
     sp = stash pop                 # "stash pop"
     sl = stash list
@@ -62,8 +63,13 @@
 [diff]
     tool = vimdiff
 [difftool]
-    prompt = true
+    prompt = false
     trustExitCode = true
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false
 [push]
     default = simple
 [credential]
