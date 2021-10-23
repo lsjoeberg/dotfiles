@@ -49,21 +49,23 @@ if [ $(uname -s) = 'Darwin' ] && command -v brew >/dev/null 2>&1; then
     alias brewup='brew update && brew upgrade && brew cleanup -s && brew doctor'
 fi
 
-# pipe to clipboard with `xclip`
-alias c='xclip -selection clipboard'
-alias v='xclip -o'
+# lazygit
+if command -v lazygit >/dev/null 2>&1; then
+    alias lg='lazygit'
+fi
+
+# kubectl
+if command -v kubectl >/dev/null 2>&1; then
+    alias k='kubectl'
+fi
 
 # open nautilus in current dir, redirect output
-alias nh='nautilus . >/dev/null 2>&1'
-gnaut() {
-    nohup nautilus -w "$1" >/dev/null &
-}
+if command -v nautilus >/dev/null 2>&1; then
+    gnaut() {
+        nohup nautilus -w "$1" >/dev/null &
+    }
+fi
 
 # unset all proxies
 alias unset-proxy='unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY'
 alias c4vpn='unset-proxy && pritunl-client-electron </dev/null &> /dev/null &'
-
-# apt
-alias aup='sudo apt-get update && apt list --upgradeable'
-alias aug='sudo apt-get upgrade'
-alias alu='apt list --upgradeable'
