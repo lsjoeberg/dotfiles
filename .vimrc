@@ -36,19 +36,24 @@ Plug 'edkolev/tmuxline.vim'
 " git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-" nerd-tree
-Plug 'preservim/nerdtree'
-" vimwiki: personal wiki and note taking
-Plug 'vimwiki/vimwiki'
+" linting
+Plug 'dense-analysis/ale'
+" tagbar
+Plug 'majutsushi/tagbar'
+" whitespace errors
+Plug 'ntpeters/vim-better-whitespace'
 " markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
+Plug 'junegunn/vim-easy-align'
 " Plug 'SidOfc/mkdx'
 " show marks in the gutter
 Plug 'kshenoy/vim-signature'
 " python
 Plug 'vim-syntastic/syntastic'
 Plug 'nvie/vim-flake8'
+" toml
+Plug 'cespare/vim-toml'
 " latex
 Plug 'lervag/vimtex'
 " indent guides
@@ -68,8 +73,8 @@ colorscheme nord
 
 set cursorline         " highlight current line
 set showmatch          " highlight matching brackets
-set conceallevel=2     " conceal 
-set concealcursor=n    " conceal on cursor line in normal mode
+set conceallevel=2     " conceal
+set concealcursor='nc' " conceal on cursor line in normal mode
 
 " override vim italic codes
 set t_ZH=[3m
@@ -93,7 +98,7 @@ filetype indent on     " load filetype-specific indent files
 
 " Display trailing spaces visually
 " set list
-set listchars=tab:»\ ,trail:·,eol:¬
+set listchars=tab:▸\ ,trail:·,eol:¬
 
 set nowrap             " don't soft-wrap lines at window border
 set linebreak          " hard-wrap lines at convenient points
@@ -128,8 +133,9 @@ set hlsearch           " highlight matches
 set ignorecase         " ignore case when searching
 set smartcase          " ... unless we start with a capital latter
 
-
 " ===== Mappings and Macros ===================================================
+
+let mapleader = ','
 
 language time en_GB.utf-8  " use English time for datestamps
 
@@ -143,8 +149,22 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
+" ------ Plugin Mappings ------------------------------------------------------
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Solving Git Conflicts: Fugitve
+nnoremap <leader>gd :Gvdiff<CR>
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
 
 " ===== Plugin Settings =======================================================
+
+" ----- Directory Browsing: `netrw` ------------------------------------------
+let g:netrw_banner = 0
+
 
 " ----- Lightline -------------------------------------------------------------
 let g:lightline = {
@@ -164,6 +184,18 @@ let g:Powerline_symbols = 'fancy'
 " ----- Tmuxline --------------------------------------------------------------
 let g:tmuxline_preset = 'full' " sets the layout of the status line
 
+" ----- Better Whitespace -----------------------------------------------------
+let g:better_whitespace_enabled = 1
+let g:strip_whitespace_on_save = 1
+let g:strip_whitespace_confirm = 0
+
+" ----- Ale -------------------------------------------------------------------
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_enter        = 0
+let g:ale_lint_on_save         = 1
+let g:ale_linters = {
+    \ 'markdown': ['markdownlint'],
+    \}
 
 " ----- Syntastic -------------------------------------------------------------
 set statusline+=%#warningmsg#
@@ -181,16 +213,15 @@ let g:syntastic_python_checkers = ['flake8']
 let g:indentLine_char = '¦'  " ┆
 let g:indentLine_defaultGroup = 'SpecialKey'
 let g:indentLine_conceallevel = 2
-let g:indentLine_concealcursor = 'n'
+let g:indentLine_concealcursor = 'nc'
 let g:indentLine_fileTypeExclude = ['markdown']
 
 " ----- VimTex ----------------------------------------------------------------
 let g:tex_flavor='latex'
 let g:vimtex_view_method='zathura'
 
-" ----- VimWiki ---------------------------------------------------------------
-let g:vimwiki_global_ext = 0
-
 " ----- Markdown --------------------------------------------------------------
 let g:markdown_folding = 1
 let g:vim_markdown_new_list_item_indent = 2
+let g:vim_markdown_conceal = 1
+let g:vim_markdown_conceal_code_blocks = 0
