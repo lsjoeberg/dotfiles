@@ -66,6 +66,13 @@ if [ -f ~/.zsh_aliases ]; then
     . ~/.zsh_aliases
 fi
 
+# ====== Command Completion ===================================================
+
+if command -v kubectl >/dev/null 2>&1; then
+    source <(kubectl completion zsh)
+    complete -F __start_kubectl k
+fi
+
 # === Shell Hooks =============================================================
 
 # hook `direnv` into the shell
