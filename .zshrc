@@ -6,9 +6,8 @@ export TERM='xterm-256color'
 # Path to oh-my-zsh installation
 export ZSH="${HOME}/.oh-my-zsh"
 
-# Set name of the theme to load
-ZSH_THEME="spaceship"
-SPACESHIP_BATTERY_SHOW="false"
+# Starship init script
+eval "$(starship init zsh)"
 
 # ====== Library Settings =====================================================
 
