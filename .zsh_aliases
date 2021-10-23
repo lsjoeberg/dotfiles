@@ -1,9 +1,5 @@
-# tree: quickly print the folder structure at different levels
+# tree: prettioes output
 alias tree='tree -AC --dirsfirst'
-alias tree1='tree -L 1'
-alias tree2='tree -L 2'
-alias tree3='tree -L 3'
-alias tree4='tree -L 4'
 
 # grep: line numbers (-n), ignore case (-i), colors
 alias grep='grep --color'
@@ -23,12 +19,6 @@ case $(uname) in
         fi
         ;;
 esac
-
-# cp: use rsync with progress bar, "cpv" means "cp verbose"
-alias cpv='rsync -a --progress -h'      # [-a] archive, keep file permissions
-alias cpvv='rsync -av --progress -h'    # [-v] increase verbosity
-alias cpvz='rsync -avz --progress -h'   # [-z] compress file during transfer
-alias cp2nas='rsync -vz --progress -h'
 
 # cat: default print to std output
 alias cat='cat -ns'
@@ -65,7 +55,3 @@ if command -v nautilus >/dev/null 2>&1; then
         nohup nautilus -w "$1" >/dev/null &
     }
 fi
-
-# unset all proxies
-alias unset-proxy='unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY'
-alias c4vpn='unset-proxy && pritunl-client-electron </dev/null &> /dev/null &'
