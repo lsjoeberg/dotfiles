@@ -10,6 +10,8 @@
     ap = add -p  # add patches interactively
     an = add -N  # track new file without adding to index
     br = branch
+    bl = "!f() { git -P branch -vv; }; f"
+    bd = branch -D
     ci = commit
     ca = commit --amend --no-edit  # append index to previous commit
     cia = commit --amend           # append index to previous commit, edit msg
