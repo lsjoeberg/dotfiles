@@ -33,11 +33,13 @@
     # rebasing
     rb = rebase
     ri = "!f() { git rebase -i HEAD~\"$1\"; }; f"
-    rbc = rebase --continue
-    rba = rebase --abort
+    rc = rebase --continue
+    ra = rebase --abort
     # interacting with remote
     mf = merge --ff-only
     mn = merge --no-ff
+    ma = merge --abort
+    mpr = merge --no-ff --no-commit
     up = !git remote update -p && !git merge --ff-only
     pbu = "!f() { git push -u origin \"$(git branch --show-current)\"; }; f"
     mfu = "!f() { git merge --ff-only origin/\"$(git rev-parse --abbrev-ref HEAD)\"; }; f"
