@@ -42,6 +42,11 @@ if [ $(uname -s) = 'Darwin' ] && command -v brew >/dev/null 2>&1; then
     fi
 fi
 
+# use nvim as vim
+if command -v nvim >/dev/null 2>&1; then
+    alias vim='nvim'
+fi
+
 # lazygit
 if command -v lazygit >/dev/null 2>&1; then
     alias lg='lazygit'
