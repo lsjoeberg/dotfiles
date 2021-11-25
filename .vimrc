@@ -29,7 +29,6 @@ call plug#begin('~/.vim/plugged')
 
 " color schemes
 Plug 'arcticicestudio/nord-vim'
-Plug 'joshdick/onedark.vim'
 " powerline
 Plug 'itchyny/lightline.vim'
 Plug 'edkolev/tmuxline.vim'
@@ -46,7 +45,6 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'junegunn/vim-easy-align'
-" Plug 'SidOfc/mkdx'
 " show marks in the gutter
 Plug 'kshenoy/vim-signature'
 " python
@@ -74,7 +72,7 @@ colorscheme nord
 set cursorline         " highlight current line
 set showmatch          " highlight matching brackets
 set conceallevel=2     " conceal
-set concealcursor='nc' " conceal on cursor line in normal mode
+set concealcursor="nc" " conceal in normal mode
 
 " override vim italic codes
 set t_ZH=[3m
@@ -191,8 +189,8 @@ let g:strip_whitespace_confirm = 0
 
 " ----- Ale -------------------------------------------------------------------
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter        = 0
-let g:ale_lint_on_save         = 1
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 1
 let g:ale_linters = {
     \ 'markdown': ['markdownlint'],
     \}
@@ -210,7 +208,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['flake8']
 
 " ----- IndentLine ------------------------------------------------------------
-let g:indentLine_char = '¦'  " ┆
+let g:indentLine_char = '│'  " ┆¦
 let g:indentLine_defaultGroup = 'SpecialKey'
 let g:indentLine_conceallevel = 2
 let g:indentLine_concealcursor = 'nc'
