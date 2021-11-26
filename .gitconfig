@@ -1,88 +1,88 @@
 [user]
-    name = Lars Sjöberg
-    email = lars.sjoberg@volvocars.com
+	name = Lars Sjöberg
+	email = lars.sjoberg@volvocars.com
 [color]
-    ui = auto
+	ui = auto
 [pretty]
-    lg = %C(yellow)%h %C(blue)%ad %C(green)%<(8,trunc)%aN %Creset%C(normal dim)•%Creset%C(bold)%<(50,trunc) %s %C(auto)%D
+	lg = %C(yellow)%h %C(blue)%ad %C(green)%<(8,trunc)%aN %Creset%C(normal dim)•%Creset%C(bold)%<(50,trunc) %s %C(auto)%D
 [alias]
-    au = add -u  # add modified files
-    ap = add -p  # add patches interactively
-    an = add -N  # track new file without adding to index
-    br = branch
-    bl = "!f() { git -P branch -vv; }; f"
-    bd = branch -D
-    ci = commit
-    ca = commit --amend --no-edit  # append index to previous commit
-    cia = commit --amend           # append index to previous commit, edit msg
-    co = checkout
-    cb = checkout -b
-    cs = "!f() { git checkout stash@{\"$1\"} -- \"$2\"; }; f"
-    cp = cherry-pick
-    st = status --short            # concise status
-    df = diff
-    ds = diff --stat
-    dfc = ds --cached
-    dt = difftool
-    mt = mergetool
-    ss = stash push                # "stash save"
-    sp = stash pop                 # "stash pop"
-    sl = stash list
-    fa = fetch --all -p -v
-    ru = remote -v update -p
-    # rebasing
-    rb = rebase
-    ri = "!f() { git rebase -i HEAD~\"$1\"; }; f"
-    rc = rebase --continue
-    ra = rebase --abort
-    # interacting with remote
-    mf = merge --ff-only
-    mn = merge --no-ff
-    ma = merge --abort
-    mpr = merge --no-ff --no-commit
-    up = !git remote update -p && !git merge --ff-only
-    pbu = "!f() { git push -u origin \"$(git branch --show-current)\"; }; f"
-    mfu = "!f() { git merge --ff-only origin/\"$(git rev-parse --abbrev-ref HEAD)\"; }; f"
-    mnu = "!f() { git merge --no-ff origin/\"$(git rev-parse --abbrev-ref HEAD)\"; }; f"
-    # list all contributors and their contribtion
-    contributors = shortlog --summary --numbered --email
-    # log
-    lg = log \
-        --date=format:'%y%m%d %H:%M' \
-        --color=always \
-        --pretty=lg
-    lgb = lg main..
-    lga = log --all \
-        --date=format:'%y%m%d %H:%M' \
-        --color=always \
-        --pretty=lg
-    lgg = log --graph \
-        --date=format:'%y%m%d %H:%M' \
-        --color=always \
-        --pretty=lg
-    lgs = !git-stat-sum \"$@\"
+	au = add -u                    # add modified files
+	ap = add -p                    # add patches interactively
+	an = add -N                    # track new file without adding to index
+	br = branch
+	bd = branch -D
+	bl = "!f() { git -P branch -vv; }; f"
+	ci = commit
+	ca = commit --amend --no-edit  # append index to previous commit
+	cia = commit --amend           # append index to previous commit, edit msg
+	co = checkout
+	cb = checkout -b
+	cs = "!f() { git checkout stash@{\"$1\"} -- \"$2\"; }; f"
+	cp = cherry-pick
+	st = status --short            # concise status
+	df = diff
+	ds = diff --stat
+	dfc = ds --cached
+	dt = difftool
+	mt = mergetool
+	ss = stash push                # "stash save"
+	sp = stash pop                 # "stash pop"
+	sl = stash list
+	fa = fetch --all -p -v
+	ru = remote -v update -p
+	# rebasing
+	rb = rebase
+	ri = "!f() { git rebase -i HEAD~\"$1\"; }; f"
+	rc = rebase --continue
+	ra = rebase --abort
+	# interacting with remote
+	mf = merge --ff-only
+	mn = merge --no-ff
+	ma = merge --abort
+	mpr = merge --no-ff --no-commit
+	up = !git remote update -p && !git merge --ff-only
+	pbu = "!f() { git push -u origin \"$(git branch --show-current)\"; }; f"
+	mfu = "!f() { git merge --ff-only origin/\"$(git rev-parse --abbrev-ref HEAD)\"; }; f"
+	mnu = "!f() { git merge --no-ff origin/\"$(git rev-parse --abbrev-ref HEAD)\"; }; f"
+	# list all contributors and their contribtion
+	contributors = shortlog --summary --numbered --email
+	# log
+	lg = log \
+	--date=format:'%y%m%d %H:%M' \
+	--color=always \
+	--pretty=lg
+	lgb = lg main..
+	lga = log --all \
+	--date=format:'%y%m%d %H:%M' \
+	--color=always \
+	--pretty=lg
+	lgg = log --graph \
+	--date=format:'%y%m%d %H:%M' \
+	--color=always \
+	--pretty=lg
+	lgs = !git-stat-sum \"$@\"
 [core]
-    editor = vim
-    pager = less -R -S
+	editor = vim
+	pager = less -R -S
 [diff]
-    tool = vimdiff
+	tool = vimdiff
 [difftool]
-    prompt = false
-    trustExitCode = true
+	prompt = false
+	trustExitCode = true
 [merge]
 	tool = vimdiff
 	conflictstyle = diff3
 [mergetool]
 	prompt = false
 [push]
-    default = simple
+	default = simple
 [credential]
-    helper = store
+	helper = store
 [log]
-    mailmap = true
+	mailmap = true
 [mailmap]
-    file = ~/.mailmap
+	file = ~/.mailmap
 [pull]
-    ff = only
+	ff = only
 [init]
 	defaultBranch = main
