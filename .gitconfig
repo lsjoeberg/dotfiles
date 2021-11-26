@@ -16,8 +16,8 @@
     ca = commit --amend --no-edit  # append index to previous commit
     cia = commit --amend           # append index to previous commit, edit msg
     co = checkout
+    cb = checkout -b
     cs = "!f() { git checkout stash@{\"$1\"} -- \"$2\"; }; f"
-    cb = "!f() { git checkout -b \"$1\"; }; f"
     cp = cherry-pick
     st = status --short            # concise status
     df = diff
