@@ -20,9 +20,6 @@ case $(uname) in
         ;;
 esac
 
-# cat: default print to std output
-alias cat='cat -ns'
-
 # less: show colors
 alias less='less -R'
 
