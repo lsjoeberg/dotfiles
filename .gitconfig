@@ -35,6 +35,10 @@
 	ri = "!f() { git rebase -i HEAD~\"$1\"; }; f"
 	rc = rebase --continue
 	ra = rebase --abort
+	# reflog
+	rl = reflog
+	# reset
+	rh = reset --hard
 	# interacting with remote
 	mf = merge --ff-only
 	mn = merge --no-ff
