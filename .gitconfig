@@ -18,27 +18,36 @@
 	co = checkout
 	cb = checkout -b
 	cs = "!f() { git checkout stash@{\"$1\"} -- \"$2\"; }; f"
+	cf = "!f() { git branch -v | fzf --ansi | cut -f 2 -w | xargs -o git checkout; }; f"
 	cp = cherry-pick
 	st = status --short            # concise status
 	df = diff
 	ds = diff --stat
-	dfc = ds --cached
+	dss = diff --shortstat
+	dfc = diff --cached
 	dt = difftool
 	mt = mergetool
 	ss = stash push                # "stash save"
-	sp = stash pop                 # "stash pop"
+	sp = stash pop
+	sa = stash apply
 	sl = stash list
 	fa = fetch --all -p -v
 	ru = remote -v update -p
 	# rebasing
 	rb = rebase
-	ri = "!f() { git rebase -i HEAD~\"$1\"; }; f"
+	ri = "!f() { git lg \"${1:-main..}\" | fzf --ansi | cut -c -7 | xargs -o git rebase -i; }; f"
 	rc = rebase --continue
 	ra = rebase --abort
+	rs = rebase --skip
+	ru = "!f() { rebase --onto origin/\"$(git branch --show-current)\"; }; f"
+	rf = "!f() { git rebase -i --autosquash \"${1:-main}\"; }; f"
+	# fixup
+	fu = "!f() { git lg \"${1:--10}\" | fzf --ansi | cut -c -7 | xargs -o git commit --fixup; }; f"
 	# reflog
 	rl = reflog
 	# reset
 	rh = reset --hard
+	rhu = "!f() { git reset --hard origin/\"$(git branch --show-current)\"; }; f"
 	# interacting with remote
 	mf = merge --ff-only
 	mn = merge --no-ff
@@ -90,3 +99,5 @@
 	ff = only
 [init]
 	defaultBranch = main
+[rebase]
+	autosquash = true
