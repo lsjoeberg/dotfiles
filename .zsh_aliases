@@ -49,6 +49,11 @@ if command -v lazygit >/dev/null 2>&1; then
     alias lg='lazygit'
 fi
 
+# terraform
+if command -v terraform >/dev/null 2>&1; then
+    alias tf='terraform'
+fi
+
 # kubectl
 if command -v kubectl >/dev/null 2>&1; then
     if command -v kubecolor >/dev/null 2>&1; then
