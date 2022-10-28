@@ -59,6 +59,14 @@ Plug 'cespare/vim-toml'
 Plug 'lervag/vimtex'
 " indent guides
 Plug 'Yggdroot/indentLine'
+" writing
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+" editing
+Plug 'tpope/vim-surround'
+Plug 'jiangmiao/auto-pairs'
+" debugging
+Plug 'dstein64/vim-startuptime'
 call plug#end()
 
 
@@ -81,6 +89,8 @@ set concealcursor="nc" " conceal in normal mode
 set t_ZH=[3m
 set t_ZR=[23m
 
+set t_Co=256
+
 " ----- Spelling --------------------------------------------------------------
 set spelllang=en_gb
 
@@ -99,7 +109,7 @@ filetype indent on     " load filetype-specific indent files
 
 " Display trailing spaces visually
 " set list
-set listchars=tab:▸\ ,trail:·,eol:¬
+set listchars=tab:▸\ ,trail:·,eol:¬,nbsp:~,extends:❯,precedes:❮,
 
 set nowrap             " don't soft-wrap lines at window border
 set linebreak          " hard-wrap lines at convenient points
@@ -144,6 +154,9 @@ language time en_GB.utf-8  " use English time for datestamps
 nnoremap <F5> "strftime("%c")<CR>P
 inoremap <F5> <C-R>=strftime("%c")<CR>
 
+" Search and replace visual selection
+vnoremap <Leader>zr :<c-u>%s/<c-r>*
+
 " Switch panes more effortlessly with CTRL-KEY instead of prefixing with CTRL-w
 nmap <C-h> <C-w>h
 nmap <C-j> <C-w>j
@@ -181,6 +194,11 @@ nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTagsRpc<CR>
 nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFixRpc<CR>
 nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationListRpc<CR>
 
+" goyo and limelight
+nnoremap <Leader>gy :Goyo<CR>
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
 " ===== Plugin Settings =======================================================
 
 " ----- Directory Browsing: `netrw` ------------------------------------------
@@ -214,9 +232,8 @@ let g:strip_whitespace_confirm = 0
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_save = 1
-let g:ale_linters = {
-    \ 'markdown': ['markdownlint'],
-    \}
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '•'
 
 " ----- Syntastic -------------------------------------------------------------
 set statusline+=%#warningmsg#
@@ -243,6 +260,12 @@ let g:vimtex_view_method='zathura'
 
 " ----- Markdown --------------------------------------------------------------
 let g:markdown_folding = 1
-let g:vim_markdown_new_list_item_indent = 2
-let g:vim_markdown_conceal = 1
 let g:vim_markdown_conceal_code_blocks = 0
+let g:vim_markdown_new_list_item_indent = 2
+
+" ----- Goyo ------------------------------------------------------------------
+let g:goyo_width = 88
+
+" ----- Limelight -------------------------------------------------------------
+let g:limelight_conceal_ctermfg = 8
+let g:limelight_conceal_guifg = '#4C566A'
