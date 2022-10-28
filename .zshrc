@@ -53,6 +53,7 @@ plugins=(
     zsh-completions
     colored-man-pages
     git-auto-fetch
+    git-flow-completion
     docker
     docker-compose
 )
@@ -96,3 +97,6 @@ fi
 if command -v pyenv >/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
+
+# fzf autocompletion and key-bindings
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
