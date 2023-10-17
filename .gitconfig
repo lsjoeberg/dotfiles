@@ -23,6 +23,7 @@
 	st = status --short            # concise status
 	df = diff
 	ds = diff --stat
+	dsb = diff --stat origin/main...
 	dss = diff --shortstat
 	dfc = diff --cached
 	dt = difftool
@@ -74,6 +75,10 @@
 	--color=always \
 	--pretty=lg
 	lgs = !git-stat-sum \"$@\"
+	# add newline to eol for all improper files
+	newlines = "!f() { \
+	git ls-files -z | while IFS= read -rd '' f; do tail -c1 < \"$f\" | read -r _ || echo >> \"$f\"; done; \
+	}; f"
 [core]
 	editor = vim
 	pager = less -R -S
@@ -99,5 +104,7 @@
 	ff = only
 [init]
 	defaultBranch = main
+[grep]
+	extendRegexp = true
 [rebase]
 	autosquash = true

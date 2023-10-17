@@ -8,6 +8,9 @@ set line-graphics = utf-8
 # --- Git Content -----------------------------------------------------
 set mailmap = true
 
+# --- Refresh Content -------------------------------------------------
+set refresh-mode = auto
+
 # --- Colors ----------------------------------------------------------
 # color area fgcolor bgcolor [attributes]
 color cursor default black normal
