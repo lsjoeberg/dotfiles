@@ -47,15 +47,15 @@ DISABLE_MAGIC_FUNCTIONS=true
 # Custom plugins ~/.oh-my-zsh/custom/plugins/
 
 plugins=(
-    git
     zsh-syntax-highlighting
     zsh-autosuggestions
     zsh-completions
     colored-man-pages
     git-auto-fetch
-    git-flow-completion
     docker
     docker-compose
+    helm
+    asdf
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -71,6 +71,9 @@ fi
 
 if command -v kubectl >/dev/null 2>&1; then
     source <(kubectl completion zsh)
+    if command -v kubecolor >/dev/null 2>&1; then
+        compdef kubecolor=kubectl # make completion work with kubecolor
+    fi
     complete -F __start_kubectl k
 fi
 
@@ -96,7 +99,19 @@ fi
 # initialize pyenv (after .zprofile env config)
 if command -v pyenv >/dev/null 2>&1; then
     eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+    export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+fi
+
+# add zoxide
+if command -v zoxide >/dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
 fi
 
 # fzf autocompletion and key-bindings
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# broot br
+if command -v broot >/dev/null 2>&1; then
+    source ~/.config/broot/launcher/bash/br
+fi

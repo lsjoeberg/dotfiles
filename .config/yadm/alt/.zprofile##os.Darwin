@@ -16,16 +16,16 @@ if command -v docker >/dev/null 2>&1; then
 fi
 
 # configure shells environment for pyenv: pyenv installed with homebrew
-if [ -d "$HOME/.pyenv" ]; then
+if [ -d "${HOME}/.pyenv" ]; then
     eval "$(pyenv init --path)"
 fi
 
-# Load RVM into a shell session *as a function*
-if [ -s "$HOME/.rvm/scripts/rvm" ]; then
-    source "$HOME/.rvm/scripts/rvm"
+# load RVM into a shell session *as a function*
+if [ -s "${HOME}/.rvm/scripts/rvm" ]; then
+    source "${HOME}/.rvm/scripts/rvm"
 fi
 
-# Load cargo environment
-if [ -f  "$HOME/.cargo/env" ]; then
-    source "$HOME/.cargo/env"
+# load cargo environment
+if [ -f  "${HOME}/.cargo/env" ]; then
+    source "${HOME}/.cargo/env"
 fi

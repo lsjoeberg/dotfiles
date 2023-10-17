@@ -15,13 +15,26 @@ PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 PATH="${PATH}:${HOME}/bin:${HOME}/.local/bin"
 
 # go
-export GOPATH="${HOME}/go"
-export GOBIN="${GOPATH}/bin"
-PATH="${PATH}:/usr/local/go/bin"
-PATH="${PATH}:${GOBIN}"
+if [ -d "${HOME}/go" ]; then
+    export GOPATH="${HOME}/go"
+    export GOBIN="${GOPATH}/bin"
+    PATH="${PATH}:/usr/local/go/bin:${GOBIN}"
+fi
 
-# Add RVM to PATH for scripting.
-PATH="${PATH}:${HOME}/.rvm/bin"
+# pyenv
+if [ -d "${HOME}/.pyenv" ]; then
+    export PYENV_ROOT="${HOME}/.pyenv"
+    PATH="${PATH}:${PYENV_ROOT}/bin"
+    # Pipenv by default uses the Python it is installed against to create the
+    # virtualenv. The following will make Pipenv use pyenv’s active Python
+    # version to create virtual environments by default.
+    PIPENV_PYTHON="${PYENV_ROOT}/shims/python"
+fi
+
+# ruby
+if [ -d "${HOME}/.rvm" ]; then
+    PATH="${PATH}:${HOME}/.rvm/bin"
+fi
 
 # kubectl plugins with krew
 if [ -d "${HOME}/.krew" ]; then
