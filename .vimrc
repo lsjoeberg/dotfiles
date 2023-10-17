@@ -35,26 +35,41 @@ Plug 'edkolev/tmuxline.vim'
 " fuzzy find
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/rpc' }
+" treesitter and orgmode
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-orgmode/orgmode'
+" terminal in floating window
+Plug 'voldikss/vim-floaterm'
+" code completion with language server
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+" diff
+Plug 'nvim-lua/plenary.nvim'
+Plug 'sindrets/diffview.nvim'
 " linting
 Plug 'dense-analysis/ale'
 " tagbar
 Plug 'majutsushi/tagbar'
+" registers
+Plug 'junegunn/vim-peekaboo'
 " whitespace errors
 Plug 'ntpeters/vim-better-whitespace'
 " markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'junegunn/vim-easy-align'
+" golang
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" rust
+Plug 'rust-lang/rust.vim'
 " show marks in the gutter
 Plug 'kshenoy/vim-signature'
-" python
-Plug 'vim-syntastic/syntastic'
-Plug 'nvie/vim-flake8'
 " toml
 Plug 'cespare/vim-toml'
+" terraform
+Plug 'hashivim/vim-terraform'
 " latex
 Plug 'lervag/vimtex'
 " indent guides
@@ -63,8 +78,10 @@ Plug 'Yggdroot/indentLine'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 " editing
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
+Plug 'editorconfig/editorconfig-vim'
 " debugging
 Plug 'dstein64/vim-startuptime'
 call plug#end()
@@ -84,6 +101,7 @@ set cursorline         " highlight current line
 set showmatch          " highlight matching brackets
 set conceallevel=2     " conceal
 set concealcursor="nc" " conceal in normal mode
+" set showcmd            " show command line
 
 " override vim italic codes
 set t_ZH=[3m
@@ -199,6 +217,24 @@ nnoremap <Leader>gy :Goyo<CR>
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
+" coc
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" Use <c-space> to trigger completion
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
 " ===== Plugin Settings =======================================================
 
 " ----- Directory Browsing: `netrw` ------------------------------------------
@@ -206,6 +242,7 @@ let g:netrw_banner = 0
 
 
 " ----- Lightline -------------------------------------------------------------
+let g:Powerline_symbols = 'fancy'
 let g:lightline = {
     \ 'colorscheme' : 'nord',
     \ 'separator': {'left': "", 'right': ""},
@@ -218,7 +255,6 @@ let g:lightline = {
     \   'gitbranch': 'fugitive#head'
     \ },
     \ }
-let g:Powerline_symbols = 'fancy'
 
 " ----- Tmuxline --------------------------------------------------------------
 let g:tmuxline_preset = 'full' " sets the layout of the status line
@@ -228,24 +264,16 @@ let g:better_whitespace_enabled = 1
 let g:strip_whitespace_on_save = 1
 let g:strip_whitespace_confirm = 0
 
+" ----- CoC -------------------------------------------------------------------
+hi default CocInlayHint ctermbg=NONE ctermfg=8
+" CocInlayHint   xxx ctermfg=12 ctermbg=16 guifg=#5e81ac guibg=#2e3440
+
 " ----- Ale -------------------------------------------------------------------
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_save = 1
 let g:ale_sign_error = '●'
 let g:ale_sign_warning = '•'
-
-" ----- Syntastic -------------------------------------------------------------
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_python_checkers = ['flake8']
 
 " ----- IndentLine ------------------------------------------------------------
 let g:indentLine_char = '│'  " ┆¦

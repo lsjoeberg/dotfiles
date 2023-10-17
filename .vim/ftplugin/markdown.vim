@@ -7,4 +7,4 @@ setlocal softtabstop=2
 set listchars=trail:·
 
 " Lint with markdownlint.
-let b:ale_linters = ['mdl']
+let b:ale_linters = ['markdownlint']
